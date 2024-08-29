@@ -1,0 +1,178 @@
+body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+    background-color: #f5f5dc; /* Beige color */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+}
+
+.container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    padding: 1em;
+}
+
+.form-container {
+    padding: 2em;
+    width: 100%;
+    max-width: 500px;
+    background-color: #ffffff;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    box-sizing: border-box;
+}
+
+h1 {
+    font-family: 'Norse Bold', sans-serif;
+    color: #333;
+    text-align: center;
+}
+
+.input-group {
+    margin-bottom: 1em;
+    position: relative;
+}
+
+.input-group label {
+    display: block;
+    margin-bottom: 0.5em;
+    color: #333;
+}
+
+.input-group input {
+    width: calc(100% - 40px);
+    padding: 0.5em 2em 0.5em 0.5em; /* Adjust padding for icon */
+    border: 1px solid #E5E7EB;
+    border-radius: 4px;
+    box-sizing: border-box;
+}
+
+.input-group input:focus {
+    border-color: #3b82f6;
+    box-shadow: 0 0 5px rgba(59, 130, 246, 0.5);
+    outline: none;
+}
+
+.password-container {
+    position: relative;
+}
+
+.toggle-password {
+    position: absolute;
+    right: 10px;
+    top: 50%;
+    transform: translateY(-50%);
+    cursor: pointer;
+    color: #333;
+}
+
+.btn {
+    background-color: #596D48;
+    color: white;
+    padding: 1em;
+    border: none;
+    border-radius: 4px;
+    width: 100%;
+    cursor: pointer;
+    font-size: 1em;
+    transition: background-color 0.3s ease;
+}
+
+.btn:hover {
+    background-color: #4e5d3b;
+}
+
+.error {
+    color: red;
+    font-size: 0.875em;
+    margin-top: 0.5em;
+}
+
+.loading-spinner {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.spinner {
+    border: 4px solid rgba(0, 0, 0, 0.1);
+    border-radius: 50%;
+    border-top: 4px solid #333;
+    width: 40px;
+    height: 40px;
+    animation: spin 1s linear infinite;
+}
+
+.password-strength.spinner {
+    animation: spin 0.5s linear;
+}
+
+@keyframes spin {
+    0% { transform: rotate(0deg); }
+    100% { transform: rotate(360deg); }
+}
+
+.password-strength {
+    font-size: 0.875em;
+    margin-top: 0.5em;
+    transition: color 0.3s ease;
+}
+
+.password-strength.weak {
+    color: red;
+}
+
+.password-strength.medium {
+    color: orange;
+}
+
+.password-strength.strong {
+    color: green;
+}
+
+.confirmation-message {
+    line-height: 1.6; /* Adjust as needed */
+    margin-bottom: 1.5em; /* Space between the message and the button */
+}
+
+.btn-reset {
+    background-color: #f5f5f5;
+    color: #333;
+    border: 1px solid #ddd;
+}
+
+.btn-reset:hover {
+    background-color: #e0e0e0;
+}
+
+body[lang="ar"] {
+    direction: rtl;
+    text-align: right;
+}
+
+body[lang="ar"] .input-group {
+    text-align: right;
+}
+
+/* Adjust input padding and alignment for RTL */
+body[lang="ar"] .input-group input {
+    padding-right: 2em; /* Adjust padding for RTL */
+    padding-left: 0.5em; /* Adjust padding for RTL */
+}
+
+/* Adjust positioning of the password toggle for RTL */
+body[lang="ar"] .toggle-password {
+    left: auto;
+    right: 10px;
+}
+
+
