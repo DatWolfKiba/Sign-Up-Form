@@ -1,5 +1,47 @@
 document.addEventListener('DOMContentLoaded', function() {
     const form = document.getElementById('signup-form');
+    
+    // Function to load saved form data
+    function loadFormData() {
+        const formData = JSON.parse(localStorage.getItem('formData'));
+        if (formData) {
+            Object.keys(formData).forEach(key => {
+                const input = form.querySelector(`#${key}`);
+                if (input) {
+                    input.value = formData[key];
+                }
+            });
+        }
+    }
+
+    // Function to save form data to local storage
+    function saveFormData() {
+        const formData = {};
+        form.querySelectorAll('input').forEach(input => {
+            formData[input.id] = input.value;
+        });
+        localStorage.setItem('formData', JSON.stringify(formData));
+    }
+
+    // Load form data on page load
+    loadFormData();
+
+    // Save form data on input change
+    form.querySelectorAll('input').forEach(input => {
+        input.addEventListener('input', saveFormData);
+    });
+
+    function handleSubmit(event) {
+        event.preventDefault(); // Prevent the default form submission
+        
+        // Perform form validation and other logic here
+        
+        // If validation is successful
+        localStorage.removeItem('formData'); // Clear saved data
+        window.location.href = 'confirmation.html'; // Redirect to confirmation page
+    }
+
+    form.addEventListener('submit', handleSubmit);
 
     function validateInput(event) {
         const input = event.target;
@@ -72,16 +114,6 @@ document.addEventListener('DOMContentLoaded', function() {
             }, 500); // Adjust time as needed
         }
     }
-
-    function handleSubmit(event) {
-        event.preventDefault(); // Prevent the default form submission
-        // Perform form validation and other logic here
-        
-        // If validation is successful
-        window.location.href = 'confirmation.html'; // Redirect to confirmation page
-    }
-
-    form.addEventListener('submit', handleSubmit);
 
     form.querySelectorAll('input').forEach(input => {
         input.addEventListener('input', validateInput);
