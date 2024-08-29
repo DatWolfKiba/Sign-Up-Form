@@ -1,3 +1,4 @@
+/* Existing styles */
 body {
     font-family: Arial, sans-serif;
     margin: 0;
@@ -10,16 +11,22 @@ body {
 }
 
 .container {
-    background: rgba(255, 255, 255, 0.9);
-    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    background-color: transparent; /* Remove background color */
     display: flex;
-    max-width: 900px;
-    margin: auto;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    padding: 1em; /* Add padding */
 }
 
 .form-container {
     padding: 2em;
-    width: 60%;
+    width: 100%;
+    max-width: 500px; /* Adjust width as needed */
+    background-color: #ffffff; /* White background for the form */
+    border-radius: 10px; /* Rounded edges */
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Shadow */
+    box-sizing: border-box; /* Ensure padding is included in width/height */
 }
 
 h1 {
@@ -30,6 +37,7 @@ h1 {
 
 .input-group {
     margin-bottom: 1em;
+    position: relative; /* For positioning the eye icon */
 }
 
 .input-group label {
@@ -39,7 +47,7 @@ h1 {
 }
 
 .input-group input {
-    width: 100%;
+    width: calc(100% - 40px); /* Adjust width to accommodate icon */
     padding: 0.5em;
     border: 1px solid #E5E7EB;
     border-radius: 4px;
@@ -50,6 +58,19 @@ h1 {
     border-color: #3b82f6;
     box-shadow: 0 0 5px rgba(59, 130, 246, 0.5);
     outline: none;
+}
+
+.password-container {
+    position: relative; /* To position the icon inside */
+}
+
+.toggle-password {
+    position: absolute;
+    right: 10px;
+    top: 50%;
+    transform: translateY(-50%);
+    cursor: pointer;
+    color: #333;
 }
 
 .btn {
@@ -67,17 +88,9 @@ h1 {
     background-color: #4e5d3b;
 }
 
-.image-sidebar {
-    width: 40%;
-    background-image: url('background-image.jpg');
-    background-size: cover;
-    background-position: center;
-    display: flex;
-    justify-content: center;
-    align-items: center;
+.error {
+    color: red;
+    font-size: 0.875em;
+    margin-top: 0.5em;
 }
 
-.image-sidebar img {
-    max-width: 100%;
-    height: auto;
-}
