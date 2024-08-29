@@ -1,47 +1,6 @@
 document.addEventListener('DOMContentLoaded', function() {
     const form = document.getElementById('signup-form');
-    
-    // Function to load saved form data
-    function loadFormData() {
-        const formData = JSON.parse(localStorage.getItem('formData'));
-        if (formData) {
-            Object.keys(formData).forEach(key => {
-                const input = form.querySelector(`#${key}`);
-                if (input) {
-                    input.value = formData[key];
-                }
-            });
-        }
-    }
-
-    // Function to save form data to local storage
-    function saveFormData() {
-        const formData = {};
-        form.querySelectorAll('input').forEach(input => {
-            formData[input.id] = input.value;
-        });
-        localStorage.setItem('formData', JSON.stringify(formData));
-    }
-
-    // Load form data on page load
-    loadFormData();
-
-    // Save form data on input change
-    form.querySelectorAll('input').forEach(input => {
-        input.addEventListener('input', saveFormData);
-    });
-
-    function handleSubmit(event) {
-        event.preventDefault(); // Prevent the default form submission
-        
-        // Perform form validation and other logic here
-        
-        // If validation is successful
-        localStorage.removeItem('formData'); // Clear saved data
-        window.location.href = 'confirmation.html'; // Redirect to confirmation page
-    }
-
-    form.addEventListener('submit', handleSubmit);
+    const autosaveKey = 'signup-form-autosave';
 
     function validateInput(event) {
         const input = event.target;
@@ -60,7 +19,6 @@ document.addEventListener('DOMContentLoaded', function() {
 
     function showError(selector, message) {
         const input = form.querySelector(selector);
-        // Remove any existing error first
         removeError(selector);
         const error = document.createElement('div');
         error.className = 'error';
@@ -90,7 +48,6 @@ document.addEventListener('DOMContentLoaded', function() {
         const strengthElement = document.getElementById('password-strength');
         const spinner = document.getElementById('password-spinner');
         
-        // Show spinner while calculating strength
         if (spinner) {
             spinner.style.display = 'inline-block';
         }
@@ -103,19 +60,49 @@ document.addEventListener('DOMContentLoaded', function() {
             strength = 'strong';
         }
 
-        // Set text and class for strength indicator
         strengthElement.textContent = `Password Strength: ${strength.charAt(0).toUpperCase() + strength.slice(1)}`;
         strengthElement.className = `password-strength ${strength}`;
 
-        // Hide spinner after calculating strength
         if (spinner) {
             setTimeout(() => {
                 spinner.style.display = 'none';
-            }, 500); // Adjust time as needed
+            }, 500);
         }
     }
 
-    form.querySelectorAll('input').forEach(input => {
-        input.addEventListener('input', validateInput);
-    });
+    function saveFormData() {
+        const formData = new FormData(form);
+        const data = {};
+        formData.forEach((value, key) => {
+            data[key] = value;
+        });
+        localStorage.setItem(autosaveKey, JSON.stringify(data));
+    }
+
+    function loadFormData() {
+        const savedData = localStorage.getItem(autosaveKey);
+        if (savedData) {
+            const data = JSON.parse(savedData);
+            for (const key in data) {
+                const input = form.querySelector(`[name=${key}]`);
+                if (input) {
+                    input.value = data[key];
+                }
+            }
+        }
+    }
+
+    function clearAutosaveData() {
+        localStorage.removeItem(autosaveKey);
+    }
+
+    function handleFormReset() {
+        clearAutosaveData();
+    }
+
+    form.addEventListener('input', saveFormData);
+    form.addEventListener('reset', handleFormReset);
+
+    loadFormData();
 });
+
