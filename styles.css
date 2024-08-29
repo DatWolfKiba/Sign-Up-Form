@@ -1,4 +1,3 @@
-/* Existing styles */
 body {
     font-family: Arial, sans-serif;
     margin: 0;
@@ -11,22 +10,21 @@ body {
 }
 
 .container {
-    background-color: transparent; /* Remove background color */
     display: flex;
     justify-content: center;
     align-items: center;
     width: 100%;
-    padding: 1em; /* Add padding */
+    padding: 1em;
 }
 
 .form-container {
     padding: 2em;
     width: 100%;
-    max-width: 500px; /* Adjust width as needed */
-    background-color: #ffffff; /* White background for the form */
-    border-radius: 10px; /* Rounded edges */
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Shadow */
-    box-sizing: border-box; /* Ensure padding is included in width/height */
+    max-width: 500px;
+    background-color: #ffffff;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    box-sizing: border-box;
 }
 
 h1 {
@@ -37,7 +35,7 @@ h1 {
 
 .input-group {
     margin-bottom: 1em;
-    position: relative; /* For positioning the eye icon */
+    position: relative;
 }
 
 .input-group label {
@@ -47,8 +45,8 @@ h1 {
 }
 
 .input-group input {
-    width: calc(100% - 40px); /* Adjust width to accommodate icon */
-    padding: 0.5em;
+    width: calc(100% - 40px);
+    padding: 0.5em 2em 0.5em 0.5em; /* Adjust padding for icon */
     border: 1px solid #E5E7EB;
     border-radius: 4px;
     box-sizing: border-box;
@@ -61,7 +59,7 @@ h1 {
 }
 
 .password-container {
-    position: relative; /* To position the icon inside */
+    position: relative;
 }
 
 .toggle-password {
@@ -82,6 +80,7 @@ h1 {
     width: 100%;
     cursor: pointer;
     font-size: 1em;
+    transition: background-color 0.3s ease;
 }
 
 .btn:hover {
