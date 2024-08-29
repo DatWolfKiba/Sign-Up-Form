@@ -13,7 +13,9 @@ document.addEventListener('DOMContentLoaded', function() {
                 removeError('#email');
             }
         } else if (input.id === 'password') {
-            updatePasswordStrength(value); // Call function for password strength
+            updatePasswordStrength(value);
+        } else if (input.id === 'confirm-password') {
+            validatePasswordMatch();
         }
     }
 
@@ -23,7 +25,7 @@ document.addEventListener('DOMContentLoaded', function() {
         const error = document.createElement('div');
         error.className = 'error';
         error.textContent = message;
-        error.id = `${selector}-error`; // Unique ID for error
+        error.id = `${selector}-error`;
         input.parentElement.appendChild(error);
         input.setAttribute('aria-invalid', 'true');
         input.setAttribute('aria-describedby', error.id);
@@ -70,6 +72,17 @@ document.addEventListener('DOMContentLoaded', function() {
         }
     }
 
+    function validatePasswordMatch() {
+        const password = document.getElementById('password').value;
+        const confirmPassword = document.getElementById('confirm-password').value;
+        
+        if (password && confirmPassword && password !== confirmPassword) {
+            showError('#confirm-password', 'Passwords do not match');
+        } else {
+            removeError('#confirm-password');
+        }
+    }
+
     function saveFormData() {
         const formData = new FormData(form);
         const data = {};
@@ -100,8 +113,23 @@ document.addEventListener('DOMContentLoaded', function() {
         clearAutosaveData();
     }
 
+    form.addEventListener('input', validateInput);
     form.addEventListener('input', saveFormData);
     form.addEventListener('reset', handleFormReset);
+
+    form.addEventListener('submit', function(event) {
+        event.preventDefault(); // Prevent the default form submission
+        
+        // Validate password match
+        validatePasswordMatch();
+        
+        // Check for errors
+        if (form.querySelectorAll('.error').length === 0) {
+            const selectedLanguage = document.getElementById('language-select').value;
+            const confirmationPage = `confirmation_${selectedLanguage}.html`;
+            window.location.href = confirmationPage; // Redirect to the confirmation page
+        }
+    });
 
     loadFormData();
 });

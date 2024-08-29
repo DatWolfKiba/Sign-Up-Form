@@ -154,3 +154,25 @@ h1 {
     background-color: #e0e0e0;
 }
 
+body[lang="ar"] {
+    direction: rtl;
+    text-align: right;
+}
+
+body[lang="ar"] .input-group {
+    text-align: right;
+}
+
+/* Adjust input padding and alignment for RTL */
+body[lang="ar"] .input-group input {
+    padding-right: 2em; /* Adjust padding for RTL */
+    padding-left: 0.5em; /* Adjust padding for RTL */
+}
+
+/* Adjust positioning of the password toggle for RTL */
+body[lang="ar"] .toggle-password {
+    left: auto;
+    right: 10px;
+}
+
+
