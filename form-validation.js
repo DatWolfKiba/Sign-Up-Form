@@ -73,6 +73,16 @@ document.addEventListener('DOMContentLoaded', function() {
         }
     }
 
+    function handleSubmit(event) {
+        event.preventDefault(); // Prevent the default form submission
+        // Perform form validation and other logic here
+        
+        // If validation is successful
+        window.location.href = 'confirmation.html'; // Redirect to confirmation page
+    }
+
+    form.addEventListener('submit', handleSubmit);
+
     form.querySelectorAll('input').forEach(input => {
         input.addEventListener('input', validateInput);
     });

@@ -81,7 +81,9 @@ h1 {
     cursor: pointer;
     font-size: 1em;
     transition: background-color 0.3s ease;
+    margin-top: 1.5em; /* Increase space above the button */
 }
+
 
 .btn:hover {
     background-color: #4e5d3b;
@@ -138,4 +140,11 @@ h1 {
 .password-strength.strong {
     color: green;
 }
+
+.confirmation-message {
+    line-height: 1.6; /* Adjust as needed */
+    margin-bottom: 1.5em; /* Space between the message and the button */
+}
+
+
 
