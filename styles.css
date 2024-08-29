@@ -61,6 +61,7 @@ h1 {
     color: #4b0082; /* Purplish color */
     text-align: center;
     font-size: 2.5em; /* Increased font size for heading */
+    margin-bottom: 1em; /* Added margin below heading */
 }
 
 .input-group {
@@ -171,10 +172,29 @@ h1 {
     color: green;
 }
 
+/* Default styles for confirmation messages */
 .confirmation-message {
-    line-height: 1.6; /* Adjusted as needed */
-    margin-bottom: 1.5em; /* Space between the message and the button */
-    text-align: right; /* Right aligned for Arabic */
+    line-height: 1.6; /* Adjusted line-height for readability */
+    margin-bottom: 2em; /* Increased space between message and button */
+    font-size: 1.2em; /* Increased font size */
+    padding: 1em; /* Added padding for better spacing */
+    border-radius: 4px; /* Rounded corners */
+    background-color: #f5f5f5; /* Light background for better readability */
+    text-align: center; /* Center-align text for default languages */
+    direction: ltr; /* Default direction for LTR languages */
+}
+
+/* Specific styles for Arabic */
+body[lang="ar"] .confirmation-message {
+    text-align: right; /* Right align text for Arabic */
+    direction: rtl; /* RTL direction for Arabic text */
+}
+
+body[lang="en"] .confirmation-message, 
+body[lang="fr"] .confirmation-message, 
+body[lang="es"] .confirmation-message {
+    text-align: left; /* Left align for English, French, and Spanish */
+    direction: ltr; /* LTR direction for English, French, and Spanish */
 }
 
 .btn-reset {
@@ -189,8 +209,8 @@ h1 {
 }
 
 body[lang="ar"] {
-    direction: rtl;
-    text-align: right;
+    direction: rtl; /* Ensures right-to-left text direction */
+    text-align: right; /* Aligns text to the right */
 }
 
 body[lang="ar"] .input-group {
