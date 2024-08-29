@@ -1,60 +1,79 @@
 document.addEventListener('DOMContentLoaded', function() {
     const form = document.getElementById('signup-form');
 
-    form.addEventListener('submit', function(event) {
-        event.preventDefault();
-        const username = form.querySelector('#username').value.trim();
-        const email = form.querySelector('#email').value.trim();
-        const password = form.querySelector('#password').value;
-        const confirmPassword = form.querySelector('#confirm-password').value;
+    function validateInput(event) {
+        const input = event.target;
+        const value = input.value.trim();
 
-        let valid = true;
-
-        form.querySelectorAll('.error').forEach(el => el.remove());
-
-        if (username === '') {
-            showError('#username', 'Username is required.');
-            valid = false;
+        if (input.id === 'email') {
+            if (!validateEmail(value)) {
+                showError('#email', 'Invalid email format');
+            } else {
+                removeError('#email');
+            }
+        } else if (input.id === 'password') {
+            updatePasswordStrength(value); // Call function for password strength
         }
-
-        if (email === '') {
-            showError('#email', 'Email is required.');
-            valid = false;
-        } else if (!validateEmail(email)) {
-            showError('#email', 'Invalid email format.');
-            valid = false;
-        }
-
-        if (password === '') {
-            showError('#password', 'Password is required.');
-            valid = false;
-        }
-
-        if (confirmPassword === '') {
-            showError('#confirm-password', 'Please confirm your password.');
-            valid = false;
-        } else if (password !== confirmPassword) {
-            showError('#confirm-password', 'Passwords do not match.');
-            valid = false;
-        }
-
-        if (valid) {
-            form.submit();
-        }
-    });
+    }
 
     function showError(selector, message) {
         const input = form.querySelector(selector);
+        // Remove any existing error first
+        removeError(selector);
         const error = document.createElement('div');
         error.className = 'error';
         error.textContent = message;
+        error.id = `${selector}-error`; // Unique ID for error
         input.parentElement.appendChild(error);
         input.setAttribute('aria-invalid', 'true');
         input.setAttribute('aria-describedby', error.id);
+    }
+
+    function removeError(selector) {
+        const input = form.querySelector(selector);
+        const error = input.parentElement.querySelector('.error');
+        if (error) {
+            error.remove();
+            input.removeAttribute('aria-invalid');
+            input.removeAttribute('aria-describedby');
+        }
     }
 
     function validateEmail(email) {
         const re = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
         return re.test(email);
     }
+
+    function updatePasswordStrength(password) {
+        const strengthElement = document.getElementById('password-strength');
+        const spinner = document.getElementById('password-spinner');
+        
+        // Show spinner while calculating strength
+        if (spinner) {
+            spinner.style.display = 'inline-block';
+        }
+        
+        let strength = 'weak';
+        if (password.length > 8) {
+            strength = 'medium';
+        }
+        if (password.match(/[A-Z]/) && password.match(/[0-9]/)) {
+            strength = 'strong';
+        }
+
+        // Set text and class for strength indicator
+        strengthElement.textContent = `Password Strength: ${strength.charAt(0).toUpperCase() + strength.slice(1)}`;
+        strengthElement.className = `password-strength ${strength}`;
+
+        // Hide spinner after calculating strength
+        if (spinner) {
+            setTimeout(() => {
+                spinner.style.display = 'none';
+            }, 500); // Adjust time as needed
+        }
+    }
+
+    form.querySelectorAll('input').forEach(input => {
+        input.addEventListener('input', validateInput);
+    });
 });
