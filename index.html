@@ -5,25 +5,24 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title data-translate="title">Sign Up Form</title>
     <link rel="stylesheet" href="styles.css">
-    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Norse+Bold&display=swap">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Lora:wght@400;700&display=swap">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
 </head>
 <body>
+    <header class="header">
+        <div class="language-selector">
+            <label for="language-select" data-translate="language-label">Language:</label>
+            <select id="language-select">
+                <option value="en">English</option>
+                <option value="es">Spanish</option>
+                <option value="fr">French</option>
+                <option value="ar">Arabic</option>
+            </select>
+        </div>
+    </header>
     <div class="container">
         <div class="form-container">
             <h1 data-translate="signup-heading">Sign Up</h1>
-            
-            <!-- Language Selector -->
-            <div class="language-selector">
-                <label for="language-select" data-translate="language-label">Language:</label>
-                <select id="language-select">
-                    <option value="en">English</option>
-                    <option value="es">Spanish</option>
-                    <option value="fr">French</option>
-                    <option value="ar">Arabic</option>
-                </select>
-            </div>
-            
             <form id="signup-form">
                 <div class="input-group">
                     <label for="username" data-translate="username-label">Username</label>
@@ -56,7 +55,8 @@
     </div>
     <script src="form-validation.js"></script>
     <script src="password-toggle.js"></script>
-    <script src="localization.js"></script> <!-- Include Localization Script -->
+    <script src="localization.js"></script>
 </body>
 </html>
+
 
